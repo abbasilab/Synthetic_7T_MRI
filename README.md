@@ -9,6 +9,10 @@ To install requirements:
 pip install -r requirements.txt
 ```
 
-# Paper
+## Training
+
+The training parameters should be specified in ```config/```.
+
+## Paper
 7T MRI synthesization from 3T acquisitions
 
