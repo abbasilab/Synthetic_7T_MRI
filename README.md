@@ -11,7 +11,7 @@ pip install -r requirements.txt
 
 ## Training
 
-The training parameters should be specified in ```config/```.
+The training parameters should be specified in ```config/params.json```.
 
 ## Paper
 7T MRI synthesization from 3T acquisitions
