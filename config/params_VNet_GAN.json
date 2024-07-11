@@ -21,7 +21,7 @@
         "fold_ind": "finalmodel"
     },
     "model": {
-        "name": "VNet",
+        "name": "VNetGAN",
         "learning_rate": 0.001,
         "weight_decay": 1e-05,
         "weight_clipping": 0.015,
@@ -32,7 +32,7 @@
     },
     "training": {
         "num_epochs": 500,
-        "exp_name": "VNet_SynthSegLoss_n=18_augmentation=02",
+        "exp_name": "VNet_GAN_n=18_augmentation=02",
         "num_workers": 32,
         "max_queue_length": 1000,
         "matmul_precision": "medium",
