@@ -5,9 +5,9 @@ import torchio as tio
 from .VNet import VNet
 
 
-class BaseModel(pl.LightningModule):
+class VNetModel(pl.LightningModule):
     def __init__(self, params):
-        super(BaseModel, self).__init__()
+        super(VNetModel, self).__init__()
         self.save_hyperparameters()
         self.loss_type = params.model.loss_type
         allowed_loss = ['MAE']

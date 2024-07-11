@@ -14,7 +14,7 @@ import sys, os, json
 sys.path.append(os.path.join(sys.path[0], '../'))
 from dataloader.patch_dataloader import patch_dataloader
 from dataloader.data_utils import load_onefold_dataset, load_all  # ,load_MRIs
-from network.VNet_model import BaseModel
+from network.VNet_model import VNetModel
 from network.WatNet_model import WatNet3DModel, WatNet2DModel
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
