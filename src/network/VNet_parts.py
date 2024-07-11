@@ -58,7 +58,8 @@ class DownTransition(nn.Module):
         out = self.ops(out)
         out = torch.add(out, down)
         return out
-    
+
+
 class UpTransition(nn.Module):
     def __init__(self, inChans, outChans, nConvs, dropout=False):
         super(UpTransition, self).__init__()
