@@ -1,0 +1,28 @@
+{
+    "fp": {
+        "subjects": "../../data/subjects.txt",
+        "filepaths": [
+            "../../data/original"
+        ],
+        "postfixes": [
+            ".nii.gz"
+        ],
+        "eval_modes" : ["org", "down2", "down4"],
+        "ckpt_dir":"../../ckpts/tensorlog/VNet_final_ckpts",
+        "leave_out_subjects": []
+    },
+    "data": {
+        "batch_size": 40,
+        "patch_size": 64,
+        "patch_overlap": 8
+    },
+    "training": {
+        "num_workers": 32,
+        "max_queue_length": 1000,
+        "matmul_precision": "medium",
+        "precision": "16-mixed"
+    },
+    "checkpoint": {
+        "ckpt_dir": "../../ckpts/tensorlog"
+    }
+}
