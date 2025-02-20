@@ -13,7 +13,7 @@ from pytorch_lightning.callbacks import LearningRateMonitor
 import sys, os, json
 sys.path.append(os.path.join(sys.path[0], '../'))
 from dataloader.patch_dataloader import patch_dataloader
-from dataloader.data_utils import load_onefold_dataset, load_all  # ,load_MRIs
+from Synthetic_7T_MRI_release.src.dataloader.data_utils_train import load_onefold_dataset, load_all  # ,load_MRIs
 from network.VNet_model import VNetModel
 from network.WatNet_model import WatNet3DModel, WatNet2DModel
 
