@@ -134,7 +134,7 @@ for mode in modes:
             os.makedirs(out_p)
 
         if params.model.name == 'VNet':
-            model = BaseModel(params).load_from_checkpoint(ckpt_p)
+            model = VNetModel(params).load_from_checkpoint(ckpt_p)
         elif params.model.name == 'WatNet2D':
             model = WatNet2DModel(params).load_from_checkpoint(ckpt_p)
         elif params.model.name == 'WatNet3D':
