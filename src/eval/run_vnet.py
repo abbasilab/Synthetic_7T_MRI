@@ -126,7 +126,7 @@ else:
     output_dir = output_path
     if not path.exists(output_dir):
         os.makedirs(output_dir, exist_ok=True)
-suffix = '_pred'
+# suffix = '_pred'
 
 for subject in preds:
     output_path_updated = path.join(output_dir, f'{subject.id}'+suffix+'.nii.gz')
