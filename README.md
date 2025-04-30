@@ -15,7 +15,7 @@ pip install -r requirements.txt
 Example command:
 
 ``` 
-        python run_vnet.py -i 'path_to_input_file(folder)'  -o 'folder_to_save_output_file(folder)' -c 'path_to_model_weight'
+        python run_vnet.py -i 'path_to_input(single file or folder with files)'  -o 'folder_to_save_output' -c 'path_to_model_weight'
 ```
 
 * Please make sure the input images meet the following criteria:
