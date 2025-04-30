@@ -15,10 +15,11 @@ pip install -r requirements.txt
 ``` Usage example
         python run_vnet.py -i 'path_to_input_file(folder)'  -o 'folder_to_save_output_file(folder)' -c 'path_to_model_weight'
 ```
+
 * Please make sure the input images are:
-        - nifti file
-        - T1-weighted 3T image
-        - brain stripped (mask files are an optional input, but the model has no innate ability to perform brain extraction. A brain mask should be provided if the input MRI is a whole head image.)
+  - Nifti file
+  - T1-weighted 3T image
+  - Brain stripped (mask files are an optional input, but the model has no innate ability to perform brain extraction. A brain mask should be provided if the input MRI is a whole head image.)
 
 ### Training
 
