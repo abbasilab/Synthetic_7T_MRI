@@ -1,5 +1,6 @@
 # 7T MRI Synthesization from 3T Acquisitions
 [🔗 View on arXiv](https://arxiv.org/abs/YYYY.NNNNN)
+
 This repository contains PyTorch model implementations for generating synthetic T1-weighted 7T MRIs from T1-weighted 3T MRI inputs. The models implemented are V-Net, Perceptual V-Net, V-Net-GAN, WATNet-2D, and WATNet-3D
 
 ## Requirements
@@ -11,7 +12,11 @@ pip install -r requirements.txt
 
 ## Usage
 
-* To run the model, use the run_vnet.py script under the eval folder. Please make sure the input is a nifti format (file ending in .nii.gz) T1-weighted 3T image that has been brain stripped. I have made mask files an optional input, but the model has no innate ability to perform brain extraction, and a brain mask should be provided if the input MRI is a whole head image.
+* To run the model, use the run_vnet.py script under the eval folder. 
+* Please make sure the input images are:
+        - nifti file
+        - T1-weighted 3T image
+        - brain stripped (mask files are an optional input, but the model has no innate ability to perform brain extraction. A brain mask should be provided if the input MRI is a whole head image.)
 
 ### Training
 
