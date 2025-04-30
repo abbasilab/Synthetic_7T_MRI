@@ -34,7 +34,7 @@ pip install -r requirements.txt
 
 ### Pretrained Weights
 
-* Pretrained weights for the base V-Net model can be found at https://ucsf.app.box.com/s/yekgjj3wvuih34n6zmcnnr9ji3p2uhng
+* Pretrained weights for the base V-Net model can be found on [🔗 Box](https://ucsf.app.box.com/s/yekgjj3wvuih34n6zmcnnr9ji3p2uhng)
 
 ## Paper BibTex Citation
 If you use this tool, please cite the following reference:
