@@ -1,7 +1,7 @@
 # 7T MRI Synthesization from 3T Acquisitions
-[🔗 View on arXiv](https://arxiv.org/abs/YYYY.NNNNN)
+[🔗 View paper on arXiv](https://arxiv.org/abs/2403.08979)
 
-This repository contains PyTorch model implementations for generating synthetic T1-weighted 7T MRIs from T1-weighted 3T MRI inputs. The models implemented are V-Net, Perceptual V-Net, V-Net-GAN, WATNet-2D, and WATNet-3D.
+This repository contains PyTorch model implementations for the paper "7T MRI Synthesization from 3T Acquisitions", presented at MICCAI 2024 conference. This model generates synthetic T1-weighted 7T MRIs from T1-weighted 3T MRI inputs. Implemented models are V-Net, Perceptual V-Net, V-Net-GAN, WATNet-2D, and WATNet-3D.
 
 ## Requirements
 
