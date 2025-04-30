@@ -19,7 +19,19 @@ pip install -r requirements.txt
 * The script for data augmentation is ```src/scripts/data_augmentation.ipynb```
 * Transformed datasets are saved under ```data/```
 
-## Paper
+## Paper BibTex Citation
 
 7T MRI synthesization from 3T acquisitions
 
+```
+@InProceedings{Cui_7T_MICCAI2024,
+        author = { Cui, Qiming and Tosun, Duygu and Mukherjee, Pratik and Abbasi-Asl, Reza},
+        title = { { 7T MRI Synthesization from 3T Acquisitions } },
+        booktitle = {proceedings of Medical Image Computing and Computer Assisted Intervention -- MICCAI 2024},
+        year = {2024},
+        publisher = {Springer Nature Switzerland},
+        volume = {LNCS 15007},
+        month = {October},
+        page = {35 -- 44}
+}
+```
