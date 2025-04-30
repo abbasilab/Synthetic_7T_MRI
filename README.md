@@ -6,7 +6,8 @@ This repository contains PyTorch model implementations for generating synthetic 
 ## Requirements
 
 To install requirements:
-```setup
+
+```sh
 pip install -r requirements.txt
 ```
 
@@ -14,7 +15,7 @@ pip install -r requirements.txt
 
 Example command:
 
-``` 
+```sh
         python run_vnet.py -i 'path_to_input (single file or folder with files)'  -o 'folder_to_save_output' -c 'path_to_model_weight'
 ```
 
@@ -41,7 +42,7 @@ Example command:
 ## Paper BibTex Citation
 If you use this tool, please cite the following reference:
 
-```
+```bibtex
 @InProceedings{Cui_7T_MICCAI2024,
         author = { Cui, Qiming and Tosun, Duygu and Mukherjee, Pratik and Abbasi-Asl, Reza},
         title = { { 7T MRI Synthesization from 3T Acquisitions } },
