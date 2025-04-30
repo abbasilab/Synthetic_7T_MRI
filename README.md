@@ -12,14 +12,16 @@ pip install -r requirements.txt
 
 ## Usage
 
-``` Usage example
+Usage example
+
+``` 
         python run_vnet.py -i 'path_to_input_file(folder)'  -o 'folder_to_save_output_file(folder)' -c 'path_to_model_weight'
 ```
 
 * Please make sure the input images meet the following criteria:
   - Nifti file
   - T1-weighted 3T image
-  - Brain stripped (provide mask files as an optional input if the image is not brain stripped.)
+  - Brain stripped (provide mask files as an optional input under ```-m``` if the image is not brain stripped.)
 
 ### Training
 
