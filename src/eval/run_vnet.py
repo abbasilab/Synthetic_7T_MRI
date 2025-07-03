@@ -23,6 +23,9 @@ parser = argparse.ArgumentParser(description='Generate synthetic 7T T1-weighted 
 
 parser.add_argument('-i', '--input', '--in', type=str, help="""Path to the input file or directory containing input files.
                     Only processes .nii.gz images""")
+parser.add_argument('--brainstripped', action='store_true', 
+                    help="""Flag to indicate if input images are already brain stripped. 
+                    When this flag is present, the image is treated as brain stripped.""")
 parser.add_argument('-m', '--mask', type=str, default=None, help='path to mask file')
 parser.add_argument('-c', '--ckpt', type=str, help='path to model file')
 parser.add_argument('-o', '--output', '--out', type=str, help="""path to save file to""")
@@ -33,6 +36,7 @@ parser.add_argument('-po', '--patch_overlap', type=int, default=8, help="""patch
 parser.add_argument('-ql', '--max_queue_length', type=int, default=1000, help="""max queue length for patch loading""")
 parser.add_argument('-nw', '--num_workers', type=int, default=1, help="""number of workers for patch loading,
                     should not exceed number of CPU cores""")
+
 
 args = parser.parse_args()
 
@@ -67,31 +71,54 @@ input_3T_files = get_filelist_from_path(input_3T_path)
 subjects_t1_3T = load_MRI_from_paths_list(input_3T_files, 't1_3T')
 ids_subjects = sorted([s.id for s in subjects_t1_3T])
 ids_missing_masks = []
+ids_not_stripped = []
+subjects_mask_dict = {} 
 
-if input_mask_path is None:
-    print('No mask path provided, using default mask generation for post-processing')
-    print('NOTE: this pipeline expects the images to be brain stripped!')
+if input_mask_path and not args.brainstripped:
+    parser.error("The -m/--mask argument requires the --brainstripped flag to be set.")
+
+# Preprocess_step1: skull-stripping in subject space
+if args.brainstripped and not input_mask_path:
+    print("The --brainstripped flag indicates that the input images are already brain stripped.")
+    print("no mask path provided, thresholding the images at 0 to create mask for post-processing")
     input_mask_path = None
-    subjects_mask = []
     ids_missing_masks = ids_subjects
 
-if input_mask_path is not None:
-    # load masks if provided
+elif args.brainstripped and input_mask_path:
+    print("--brainstripped flag used and mask path provided. Using input masks for defined subjects")
     input_mask_files = get_filelist_from_path(input_mask_path)
-    subjects_mask = load_mask_from_paths_list(input_mask_files)
-    ids_masks = sorted([s.id for s in subjects_mask])
-
+    subjects_mask_list = load_mask_from_paths_list(input_mask_files)
+    # Create dictionary mapping subject IDs to their masks
+    subjects_mask_dict = {s.id: s for s in subjects_mask_list}
+    ids_masks = sorted([s.id for s in subjects_mask_list])
+    
     if ids_subjects != ids_masks:
-        # checck if all subjects have a corresponding mask
+        # check if all subjects have a corresponding mask
         ids_missing_masks = list(set(ids_subjects) - set(ids_masks))
         print("id of subjects and masks do not match.\n" \
             f"missing masks for subjects {ids_missing_masks}\n"
-            "using default mask generation for post-processing of these subjects")
+            "thresholding the images at 0 to create mask for post-processing")
+else:
+    print("--brainstripped flag not used, skull-stripping the images")
+    subjects_mask_dict = {}  # Initialize empty dictionary
+    ids_not_stripped = ids_subjects
 
+# Generate masks for brainstripped subjects without masksand add to dictionary
 subjects_missing_masks = [s for s in subjects_t1_3T if s.id in ids_missing_masks]
 for subject_for_maskgen in subjects_missing_masks:
     generated_mask = default_mask_generation(subject_for_maskgen)
-    subjects_mask.append(generated_mask)
+    subjects_mask_dict[subject_for_maskgen.id] = generated_mask
+
+# Generate masks and change the images to brainstripped forms when input is not brain stripped:
+subjects_not_stripped = [s for s in subjects_t1_3T if s.id in ids_not_stripped]
+
+# Assert that all subject IDs have corresponding masks
+missing_ids = set(s.id for s in subjects_t1_3T) - set(subjects_mask_dict.keys())
+if missing_ids:
+    raise ValueError(f"Still missing masks for subjects: {missing_ids}")
+
+# Create ordered list of masks matching the subject order
+subjects_mask = [subjects_mask_dict[subject.id] for subject in subjects_t1_3T]
 
 subjects_dataset = tio.SubjectsDataset(apply_mask_to_subject(subjects_t1_3T, subjects_mask))
 
