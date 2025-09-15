@@ -74,19 +74,20 @@ class VNet_GAN(pl.LightningModule):
         elif self.loss_type == 'SynthSeg3':
             SynthSeg_loss = self.criterion_SynthSeg_AfterBlock3(img_s7t.squeeze(), img_7t.squeeze())
             content_loss = self.MAE_alpha * MAE_loss + self.SynthSeg_alpha * SynthSeg_loss
-
+        g_opt.zero_grad()
         adv_loss = -torch.mean(self.net_D(img_s7t))
         g_loss = content_loss + adv_loss
         self.manual_backward(g_loss)
         g_opt.step()
-        g_opt.zero_grad()
+        
         self.untoggle_optimizer(g_opt)
 
         self.toggle_optimizer(d_opt)
+        d_opt.zero_grad()
         d_loss = -torch.mean(self.net_D(img_7t)) + torch.mean(self.net_D(img_s7t.detach()))
         self.manual_backward(d_loss)
         d_opt.step()
-        d_opt.zero_grad()
+        
         self.untoggle_optimizer(d_opt)
 
         bn = self.bn
